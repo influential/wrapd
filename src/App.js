@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
 
 function App() {
 
-    const [token, setToken] = useState("")
-
-    useEffect(() => {
-        
-    })
-
     return (
-        <h1>Wrapd.</h1>
+        <>
+            <h1>Wrapd.</h1>
+            <Login />
+            <Dashboard />
+        </>
+       
     );
 }
 
