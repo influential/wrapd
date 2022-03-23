@@ -1,47 +1,47 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoggedIn } from '../redux/user';
 
-const REACT_APP_CLIENT_ID="29d2fe5ce8344216a0aba2e6af42c3eb"
-const REACT_APP_REDIRECT_URI="http://localhost:3000"
-const REACT_APP_AUTH_ENDPOINT="https://accounts.spotify.com/authorize"
-const REACT_APP_RESPONSE_TYPE="token"
+function authorize() {
+    const url = `${process.env.REACT_APP_AUTH_ENDPOINT}?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=${process.env.REACT_APP_RESPONSE_TYPE}`;
+    window.location = url;
+}
 
-export const useLogin = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [token, setToken] = useState(null);
-    const [url, setUrl] = useState("");
+export default function useLogin() {
+    // const [token, setToken] = useState(null);
+    const { isLoggedIn } = useSelector(state => state.user);
+    const dispatch  = useDispatch();
 
-
-    const logout = () => {
-        console.log("Logout clicked");
-        window.localStorage.removeItem("token");
-        
-        setToken(null);
-        setIsLoggedIn(false);
-    }
-    
+    // The following runs everytime the login component is rendered.
     useEffect(() => {
-        const url = `${REACT_APP_AUTH_ENDPOINT}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URI}&response_type=${REACT_APP_RESPONSE_TYPE}`;
-        setUrl(url);
+        console.log("LOGIN HOOK RAN")
 
+        // The following only runs if there is a hash value in the current URL. The hash value will only be set 
+        // if the authorization scopes are accepted on the Spotify redirect. Once the user clicks accept, 
+        // they are brought back to our login page, hash is set, so we parse hash to find the token.
         if (window.location.hash) {
+            console.log("HASH FOUND")
             const hash = window.location.hash;
-            let _token = window.localStorage.getItem("token");
-
+            let _token = localStorage.getItem("token");
+    
             if (!_token && hash) {
                 _token = hash
                             .substring(1)
                             .split("&")
                             .find(c => c.startsWith("access_token"))
                             .split("=")[1];
-                window.location.hash = "";
-                window.location = "";
-                window.localStorage.setItem("token", _token);
+                
+                localStorage.setItem("token", _token);
             }
-            setToken(_token);
-            setIsLoggedIn(true);
+
+            // Otherwise the token stored in localStorage is used
+            // setToken(_token);
+            dispatch(setLoggedIn(_token));
+
+            window.location.hash = "";
+            window.location = "/";
         } 
-
-    }, [token, url, isLoggedIn]);
-
-    return { token, url, logout, isLoggedIn };
+    }, [])
 }
+
+export { authorize };
