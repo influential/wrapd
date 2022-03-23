@@ -3,11 +3,12 @@ import Layout from './components/Layout';
 import Landing from './components/Landing';
 import Dashboard from './components/Dashboard';
 
-import './App.css';
+import GlobalStyle from './globalStyles';
 
 function App() {
     return (
         <BrowserRouter>
+            <GlobalStyle />
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Landing />} />

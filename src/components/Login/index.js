@@ -14,9 +14,14 @@ function Login() {
         console.log("isLoggedIn:", isLoggedIn);
     }, [isLoggedIn]);
 
-    if (!isLoggedIn) {
-        return <LoginStyled onClick={authorize}>Login with Spotify</LoginStyled>
-    } else { return <button onClick={logout}>Logout</button> }
+    
+    return (
+        <LoginStyled>
+            <em>{ isLoggedIn ? "Logout" : "Login"}</em>
+        </LoginStyled>
+
+    )
+    
 
 }
 
