@@ -1,20 +1,20 @@
-import { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
+import Landing from './components/Landing';
+import Dashboard from './components/Dashboard';
+
 import './App.css';
 
-import Login from './components/Login';
-import Dashboard from './components/Dashboard';
-import { useSelector } from 'react-redux';
-
 function App() {
-    const { isLoggedIn } = useSelector(state => state.user);
-
     return (
-        <>
-            <h1>Wrapd.</h1>
-            <Login />
-            { isLoggedIn && <Dashboard /> }
-        </>
-       
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Landing />} />
+                    <Route path="dashboard" element={<Dashboard />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
     );
 }
 
