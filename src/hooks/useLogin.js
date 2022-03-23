@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { setLoggedIn } from '../redux/user';
 
+
+// Navigates to the Spotify authorization page where the user must accept the requested scopes
+// that are required to pull data fromo the Spotify Web API. 
 function authorize() {
     const url = `${process.env.REACT_APP_AUTH_ENDPOINT}?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=${process.env.REACT_APP_RESPONSE_TYPE}`;
     window.location = url;
@@ -9,7 +12,7 @@ function authorize() {
 
 export default function useLogin() {
     // const [token, setToken] = useState(null);
-    const { isLoggedIn } = useSelector(state => state.user);
+    // const { isLoggedIn } = useSelector(state => state.user);
     const dispatch  = useDispatch();
 
     // The following runs everytime the login component is rendered.
@@ -37,11 +40,12 @@ export default function useLogin() {
             // Otherwise the token stored in localStorage is used
             // setToken(_token);
             dispatch(setLoggedIn(_token));
-
+            
+            // Clear the URL to hide any data given in the callback from Spotify
             window.location.hash = "";
             window.location = "/";
         } 
-    }, [])
+    })
 }
 
 export { authorize };

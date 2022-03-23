@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import useLogin, { authorize } from '../../hooks/useLogin';
 import useLogout from '../../hooks/useLogout';
 
