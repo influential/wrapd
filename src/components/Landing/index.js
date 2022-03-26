@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Login from '../Login';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import { LandingContainer } from './Landing.styled'
 import { FaSpotify } from 'react-icons/fa';
-import useLogin, { authorize } from '../../hooks/useLogin';
+import { authorize } from '../../hooks/useLogin';
 import useLogout from '../../hooks/useLogout';
 
 function Landing() {
-    const { isLoggedIn } = useSelector(state => state.user);
+    const { isLoggedIn, loginRedirect } = useSelector(state => state.user);
     const logout = useLogout();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isLoggedIn && loginRedirect) {
+            navigate('dashboard');
+        }
+    });
 
     return (
         <LandingContainer>

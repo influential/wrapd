@@ -1,18 +1,28 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLoggedIn } from '../redux/user';
 
+const scopes = [
+    'user-read-email',
+    'user-read-private',
+    'playlist-read-collaborative',
+    'playlist-read-private',
+    'user-library-read',
+    'user-top-read',    
+    'user-read-recently-played',
+    'user-follow-read',
+];
 
 // Navigates to the Spotify authorization page where the user must accept the requested scopes
 // that are required to pull data fromo the Spotify Web API. 
 function authorize() {
-    const url = `${process.env.REACT_APP_AUTH_ENDPOINT}?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=${process.env.REACT_APP_RESPONSE_TYPE}`;
+    const url = `${process.env.REACT_APP_AUTH_ENDPOINT}?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=${process.env.REACT_APP_RESPONSE_TYPE}&scope=${scopes}`;
     window.location = url;
 }
 
 export default function useLogin() {
     // const [token, setToken] = useState(null);
-    // const { isLoggedIn } = useSelector(state => state.user);
+    const { isLoggedIn, token } = useSelector(state => state.user);
     const dispatch  = useDispatch();
 
     // The following runs everytime the login component is rendered.
@@ -40,10 +50,13 @@ export default function useLogin() {
             // Otherwise the token stored in localStorage is used
             // setToken(_token);
             dispatch(setLoggedIn(_token));
+
+            // console.log("USELOGIN: ", token)
             
             // Clear the URL to hide any data given in the callback from Spotify
-            window.location.hash = "";
-            window.location = "/";
+            // window.location.hash = "";
+            // window.location = "/";
+            // for some reason this causes bugs with storing the token in redux store
         } 
     })
 }

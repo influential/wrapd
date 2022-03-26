@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import useLogin, { authorize } from '../../hooks/useLogin';
-import useLogout from '../../hooks/useLogout';
+import useLogin from '../../hooks/useLogin';
 
 import { LoginStyled } from './Login.styled';
 
 function Login() {
     useLogin();
-    const logout = useLogout();
+    // const logout = useLogout();
     const { isLoggedIn } = useSelector(state => state.user);
 
     useEffect(() => {
