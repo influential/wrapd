@@ -6,5 +6,5 @@ export const DashboardContainer = styled.div`
     justify-content: center;
     align-items: center;
 
-    border: 2px solid red;
+    /* border: 2px solid red; */
 `

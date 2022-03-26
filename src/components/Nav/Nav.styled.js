@@ -37,6 +37,8 @@ export const NavContainer = styled.nav`
 
 export const Hero = styled.div`
     background-color: #0fc650;
+    background-color: white;
+
     color: white;
     font-weight: bold;
     padding: 1px 20px;

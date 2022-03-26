@@ -43,11 +43,14 @@ export const topItemsSlice = createSlice({
         time_range: "short_term",
         status: null
     },
-    // reducers: {
-    //     loadMore: (state, action) => {
-
-    //     }
-    // },
+    reducers: {
+        setType: (state, action) => {
+            state.type = action.payload;
+        },
+        setRange: (state, action) => {
+            state.time_range = action.payload;
+        },
+    },
     extraReducers: {
         [getTopItems.pending]: (state, action) => {
             state.status = "loading";
@@ -64,5 +67,5 @@ export const topItemsSlice = createSlice({
     }
 });
 
-// export const { loadMore } = topItemsSlice.actions;
+export const { setType, setRange } = topItemsSlice.actions;
 export default topItemsSlice.reducer;
