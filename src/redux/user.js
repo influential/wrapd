@@ -12,18 +12,18 @@ export const userSlice = createSlice({
             state.isLoggedIn = true;
             state.token = action.payload;
             
-            console.log("LOGGED IN");
+            // console.log("LOGGED IN");
         },
         setLoggedOut: (state) => {
             state.isLoggedIn = false;
             state.token = null;
             state.loginRedirect = true;
-            console.log("LOGGED OUT");
+            // console.log("LOGGED OUT");
 
         },
         setLoginRedirect: (state, action) => {
             state.loginRedirect = action.payload;
-            console.log("Redirect to dashboard disabled");
+            // console.log("Redirect to dashboard disabled");
         }
     }
 });

@@ -10,7 +10,7 @@ function Login() {
     const { isLoggedIn } = useSelector(state => state.user);
 
     useEffect(() => {
-        console.log("isLoggedIn:", isLoggedIn);
+        // console.log("isLoggedIn:", isLoggedIn);
     }, [isLoggedIn]);
 
     

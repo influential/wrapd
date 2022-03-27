@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// const topArtistsEndpoint = "https://api.spotify.com/v1/me/top/artists";
-
 export const getTopItems = createAsyncThunk(
     "getTopItems",
     async ({ token, type, limit, offset, range }) => {
@@ -12,7 +10,7 @@ export const getTopItems = createAsyncThunk(
         let query = `?limit=${limit}&offset=${offset}&time_range=${range}`;
         let endpoint = base + query;
 
-        console.log(endpoint)
+        // console.log(endpoint)
 
         return axios({
             method: "GET",
@@ -21,7 +19,7 @@ export const getTopItems = createAsyncThunk(
                 "Authorization": `Bearer ${token}`
             },
         }).then(res => {
-            console.log("res: ", res);
+            // console.log("res: ", res);
             return res.data;
             
 
@@ -57,8 +55,8 @@ export const topItemsSlice = createSlice({
         },
         [getTopItems.fulfilled]: (state, action) => {
             state.status = "success";
-            console.log("success");
-            console.log("action.payload:", action.payload)
+            // console.log("success");
+            // console.log("action.payload:", action.payload)
             state.data = action.payload;
         },
         [getTopItems.rejected]: (state, action) => {

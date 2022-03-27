@@ -39,10 +39,10 @@ function TopItems() {
         
     }, [token, dispatch, type, limit, offset, range]);
 
-    useEffect(() => {
-        console.log("Data: ", data);
-        console.log("Status:" , status);
-    },[data, status]);
+    // useEffect(() => {
+    //     console.log("Data: ", data);
+    //     console.log("Status:" , status);
+    // },[data, status]);
 
     return (
         <>

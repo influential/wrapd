@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoggedIn } from '../redux/user';
+import { config } from '../Constants';
 
 const scopes = [
     'user-read-email',
@@ -13,10 +14,11 @@ const scopes = [
     'user-follow-read',
 ];
 
+
 // Navigates to the Spotify authorization page where the user must accept the requested scopes
 // that are required to pull data fromo the Spotify Web API. 
 function authorize() {
-    const url = `${process.env.REACT_APP_AUTH_ENDPOINT}?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=${process.env.REACT_APP_RESPONSE_TYPE}&scope=${scopes}`;
+    const url = `${config.AUTH_ENDPOINT}?client_id=${config.CLIENT_ID}&redirect_uri=${config.REDIRECT_URI}&response_type=${config.RESPONSE_TYPE}&scope=${scopes}`;
     window.location = url;
 }
 
@@ -27,13 +29,13 @@ export default function useLogin() {
 
     // The following runs everytime the login component is rendered.
     useEffect(() => {
-        console.log("LOGIN HOOK RAN")
+        // console.log("LOGIN HOOK RAN")
 
         // The following only runs if there is a hash value in the current URL. The hash value will only be set 
         // if the authorization scopes are accepted on the Spotify redirect. Once the user clicks accept, 
         // they are brought back to our login page, hash is set, so we parse hash to find the token.
         if (window.location.hash) {
-            console.log("HASH FOUND")
+            // console.log("HASH FOUND")
             const hash = window.location.hash;
             let _token = localStorage.getItem("token");
     
