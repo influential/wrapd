@@ -48,7 +48,7 @@ function TopItems() {
         <>
             <h1>Top { type[0].toUpperCase() + type.substring(1) }</h1>
 
-            <TopMenu setType={setType} setRange={setRange}/>
+            <TopMenu type={type} range={range} setType={setType} setRange={setRange}/>
 
             { status === "loading" && <h2>Loading...</h2>}
 

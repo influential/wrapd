@@ -15,6 +15,7 @@ export const TopMenuContainer = styled.div`
 
     /* border: 2px solid orange; */
 
+    
 
     .btn {
         margin: 5px;
@@ -32,8 +33,14 @@ export const TopMenuContainer = styled.div`
         &:hover {
             color: white;
             background: #0fc650;
-            border: 2px solid #0fc650
+            border: 2px solid #0fc650;
         }
+    }
+
+    .active {
+        color: white;
+        background: #0fc650;
+        border: 2px solid #0fc650;
     }
 
     .types {
