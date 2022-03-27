@@ -7,7 +7,7 @@ const dev = {
 
 const prod = {
     CLIENT_ID: "29d2fe5ce8344216a0aba2e6af42c3eb",
-    REDIRECT_URI: "influential.github.io/wrapd",
+    REDIRECT_URI: "https://wrapd-app.herokuapp.com/",
     AUTH_ENDPOINT: "https://accounts.spotify.com/authorize",
     RESPONSE_TYPE: "token"
 }
